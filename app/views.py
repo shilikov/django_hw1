@@ -7,6 +7,7 @@ import pathlib
 
 
 def home_view(request):
+    # return HttpResponse('Здесь будет сайт!')
     template_name = 'app/home.html'
     # впишите правильные адреса страниц, используя
     # функцию `reverse`
@@ -15,7 +16,7 @@ def home_view(request):
         'Показать текущее время': reverse('time'),
         'Показать содержимое рабочей директории': reverse('workdir')
     }
-    
+
     # context и параметры render менять не нужно
     # подбробнее о них мы поговорим на следующих лекциях
     context = {
@@ -34,8 +35,13 @@ def time_view(request):
 
 def workdir_view(request):
     # по аналогии с `time_view`, напишите код,
-    # который возвращает список файлов в рабочей 
+    # который возвращает список файлов в рабочей
     # директории
-    my_catalog = os.listdir(path=pathlib.Path(__file__).parent.absolute())
-    return HttpResponse(my_catalog.__str__().strip("[]"))
+    # files = os.listdir()
+    # msg = f'Список файлов в рабочей директории: {files}'
+    # return HttpResponse(msg)
+    current_dir = os.listdir(path=pathlib.Path(__file__).parent.absolute())
+    msg = f'Список файлов в рабочей директории: {current_dir}'
+    return HttpResponse(msg)
+
 
